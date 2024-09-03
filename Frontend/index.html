@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Voices - TIME</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="#">TIME</a></h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="featured-voices">
+            <h2>Featured Voices</h2>
+            <div class="voices-grid">
+                <div class="voice">
+                    <h3>Anatol Lieven</h3>
+                    <p>Russia Has Been Warning the West About Ukraine for Decades</p>
+                </div>
+                <div class="voice">
+                    <h3>Yohanca Delgado</h3>
+                    <p>The Life-Changing Practice That Will Help You Feel More Gratitude</p>
+                </div>
+                <div class="voice">
+                    <h3>Ismat Ara</h3>
+                    <p>How It Feels to Be a Muslim Woman Sold by India’s Right Wing</p>
+                </div>
+                <div class="voice">
+                    <h3>W. Kamau Bell</h3>
+                    <p>There’s So Much More To Say About Bill Cosby</p>
+                </div>
+                <div class="voice">
+                    <h3>Robert J. Davis</h3>
+                    <p>Why You Shouldn’t Exercise to Lose Weight</p>
+                </div>
+                <div class="voice">
+                    <h3>Christina Bu</h3>
+                    <p>What Norway Can Teach the World About Switching to Electric Vehicles</p>
+                </div>
+            </div>
+        </section>
+
+        <aside class="latest-stories">
+            <h2>Latest Stories</h2>
+            <ul id="latest-stories-container"></ul>
+        </aside>
+
+    </main>
+
+    <script>
+        // adds the latest stories dynamically
+        fetch("http://localhost:3000/getTimeStories").then((data) => data.json()).then((data) => {
+            const divEl = document.getElementById("latest-stories-container");
+            let result = "";
+            for (let i of data) {
+                const el = `
+                    <li>
+                        <a href='${i.link}'>${i.title}</a>
+                        <span>${i.date}</span>
+                    </li>
+                `
+                console.log(i)
+                result += el;
+
+            }
+            divEl.innerHTML = result;
+        })
+
+
+    </script>
+</body>
+
+</html>
